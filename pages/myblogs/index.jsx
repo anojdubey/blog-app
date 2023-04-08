@@ -1,66 +1,58 @@
-import { Inter } from "next/font/google";
-import styles from "@/styles/Home.module.css";
-import {
-  Autocomplete,
-  Box,
-  Button,
-  Container,
-  Grid,
-  IconButton,
-  TextField,
-  Typography,
-} from "@mui/material";
-import logo from "../assets/demologo.png";
 import NavBar from "@/components/NavBar";
-import { useRouter } from "next/router";
+import { Box, Container, Grid, Typography } from "@mui/material";
+import React from "react";
 import { getCookies } from "cookies-next";
-import { useState } from "react";
+import { useRouter } from "next/router";
+import styles from "@/styles/Home.module.css";
 
-const inter = Inter({ subsets: ["latin"] });
-
-const filterData = (query, data) => {
-  if (!query) {
-    return data;
-  } else {
-    return data.filter((d) => d.toLowerCase().includes(query));
-  }
-};
-
-export default function Home({ data, user }) {
-  const [searchQuery, setSearchQuery] = useState("");
-  const searchData = data.map((d) => ({
-    title: d.title,
-    author: d.author,
-  }));
-  console.log(searchData);
-
+export default function BlogInfo({ data, user }) {
+  const router = useRouter();
+  console.log(data);
   return (
-    <>
-      <main>
-        <NavBar user={user} />
-        <Autocomplete
-          id="free-solo-demo"
-          options={searchData.map((option) => option.title)}
-          renderInput={(params) => <TextField {...params} label="freeSolo" />}
-        />
-        <Container
-          sx={{
-            mt: "2rem",
-          }}
-        >
-          {data.map((blog) => (
-            <Box key={blog._id}>
-              <BlogCard
-                id={blog._id}
-                title={blog.title}
-                content={blog.content}
-                image={blog.images}
-              />
-            </Box>
-          ))}
-        </Container>
-      </main>
-    </>
+    <div>
+      {!user ? (
+        <>
+          <NavBar user={user} />
+          <h1
+            style={{
+              textAlign: "center",
+            }}
+          >
+            Please Login First{" "}
+            <span
+              style={{
+                color: "blue",
+                cursor: "pointer",
+                fontStyle: "underline",
+              }}
+              onClick={() => router.push("/login")}
+            >
+              Click Here
+            </span>
+          </h1>
+        </>
+      ) : (
+        <main>
+          <NavBar user={user} />
+          <Container
+            sx={{
+              mt: "2rem",
+            }}
+          >
+            {data.blog.map((blog) => (
+              <Box key={blog._id}>
+                <BlogCard
+                  id={blog._id}
+                  title={blog.title}
+                  content={blog.content}
+                  image={blog.images}
+                />
+              </Box>
+            ))}
+          </Container>
+        </main>
+      )}
+    </div>
   );
 }
 
@@ -99,7 +91,7 @@ const BlogCard = ({ title, content, image, id }) => {
             className={styles.blogcard__content}
             variant="body1"
           ></Typography>
-          {/* <IconButton
+          <Box
             sx={{
               mt: "1rem",
               display: "flex",
@@ -118,8 +110,7 @@ const BlogCard = ({ title, content, image, id }) => {
             >
               Read More ...
             </Typography>
-          </IconButton> */}
-          <Button onClick={() => router.push(`/${id}`)}>Read more...</Button>
+          </Box>
         </Grid>
       </Grid>
     </Box>
@@ -127,14 +118,24 @@ const BlogCard = ({ title, content, image, id }) => {
 };
 
 export const getServerSideProps = async (req, res) => {
-  const response = await fetch(`http://localhost:3000/api/blog`);
-  const data = await response.json();
   let cookie = getCookies(req);
+  let data;
+  let user = cookie.username;
   if (!cookie) cookie = "";
+  if (user) {
+    const response = await fetch(`http://localhost:3000/api/myblog/`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ username: user }),
+    });
+    data = await response.json();
+  }
   console.log(data);
   return {
     props: {
-      data: data.blogs,
+      data: data || null,
       user: cookie.username || null,
     },
   };
