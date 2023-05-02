@@ -1,5 +1,5 @@
 import EditForm from "@/components/EditForm";
-import Navbar from "@/components/Navbar";
+import Navbar from "@/components/NavigationBar";
 import {
   Box,
   Button,

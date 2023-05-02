@@ -11,7 +11,7 @@ import {
   Typography,
 } from "@mui/material";
 import logo from "../assets/demologo.png";
-import Navbar from "@/components/Navbar";
+import Navbar from "@/components/NavigationBar";
 import { useRouter } from "next/router";
 import { getCookies } from "cookies-next";
 import { useState } from "react";

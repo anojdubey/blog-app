@@ -1,4 +1,4 @@
-import Navbar from "@/components/Navbar";
+import Navbar from "@/components/NavigationBar";
 import { Box, Container, Grid, Typography } from "@mui/material";
 import React from "react";
 import { getCookies } from "cookies-next";

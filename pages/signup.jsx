@@ -3,7 +3,7 @@ import TextField from "@mui/material/TextField";
 import Button from "@mui/material/Button";
 import Container from "@mui/material/Container";
 import { css } from "@emotion/react";
-import Navbar from "@/components/Navbar";
+import Navbar from "@/components/NavigationBar";
 import { Box, Typography } from "@mui/material";
 import { useRouter } from "next/router";
 import { getCookies } from "cookies-next";

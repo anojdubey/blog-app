@@ -14,7 +14,7 @@ import "suneditor/dist/css/suneditor.min.css";
 import { useState } from "react";
 import { useRouter } from "next/router";
 import { getCookies } from "cookies-next";
-import Navbar from "@/components/Navbar";
+import Navbar from "@/components/NavigationBar";
 
 const SunEditor = dynamic(() => import("suneditor-react"), {
   ssr: false,
