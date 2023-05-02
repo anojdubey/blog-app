@@ -127,7 +127,7 @@ const BlogCard = ({ title, content, image, id }) => {
 };
 
 export const getServerSideProps = async (req, res) => {
-  const response = await fetch(`http://localhost:3000/api/blog`);
+  const response = await fetch(`https://blog-app-nu-olive.vercel.app/api/blog`);
   const data = await response.json();
   let cookie = getCookies(req);
   if (!cookie) cookie = "";

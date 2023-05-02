@@ -46,13 +46,16 @@ function LoginForm() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     const req = { username, password };
-    const response = await fetch("http://localhost:3000/api/login", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(req),
-    });
+    const response = await fetch(
+      "https://blog-app-nu-olive.vercel.app/api/login",
+      {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(req),
+      }
+    );
     const data = await response.json();
     alert(data.success);
     router.push("/");

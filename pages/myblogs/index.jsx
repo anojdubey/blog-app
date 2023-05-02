@@ -123,13 +123,16 @@ export const getServerSideProps = async (req, res) => {
   let user = cookie.username;
   if (!cookie) cookie = "";
   if (user) {
-    const response = await fetch(`http://localhost:3000/api/myblog/`, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({ username: user }),
-    });
+    const response = await fetch(
+      `https://blog-app-nu-olive.vercel.app/api/myblog/`,
+      {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ username: user }),
+      }
+    );
     data = await response.json();
   }
   console.log(data);

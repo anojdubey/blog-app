@@ -20,30 +20,36 @@ export default function BlogDetails({ data, id, user, access }) {
   const [comment, setComment] = useState("");
   const router = useRouter();
   const handleDelete = async () => {
-    const response = await fetch(`http://localhost:3000/api/blog/${id}`, {
-      method: "DELETE",
-    });
+    const response = await fetch(
+      `https://blog-app-nu-olive.vercel.app/api/blog/${id}`,
+      {
+        method: "DELETE",
+      }
+    );
     const data = await response.json();
     console.log(data);
     router.push("/");
   };
 
   const postComment = async () => {
-    const response = await fetch(`http://localhost:3000/api/blog/${id}`, {
-      method: "PUT",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        comments: [
-          ...prevComments,
-          {
-            username: user,
-            desc: comment,
-          },
-        ],
-      }),
-    });
+    const response = await fetch(
+      `https://blog-app-nu-olive.vercel.app/api/blog/${id}`,
+      {
+        method: "PUT",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          comments: [
+            ...prevComments,
+            {
+              username: user,
+              desc: comment,
+            },
+          ],
+        }),
+      }
+    );
     const data = await response.json();
     console.log(data);
     router.reload();
@@ -185,7 +191,9 @@ export const getServerSideProps = async (req, res) => {
   const cookie = getCookies(req);
   console.log(cookie);
   const id = req.query.id;
-  const response = await fetch(`http://localhost:3000/api/blog/${id}`);
+  const response = await fetch(
+    `https://blog-app-nu-olive.vercel.app/api/blog/${id}`
+  );
   const data = await response.json();
   return {
     props: {
