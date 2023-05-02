@@ -1,5 +1,5 @@
 import EditForm from "@/components/EditForm";
-import NavBar from "@/components/NavBar";
+import Navbar from "@/components/Navbar";
 import {
   Box,
   Button,
@@ -53,7 +53,7 @@ export default function BlogDetails({ data, id, user, access }) {
   }, [comment]);
   return (
     <>
-      <NavBar />
+      <Navbar />
       <Container>
         <Grid
           container

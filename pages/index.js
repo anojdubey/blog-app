@@ -11,7 +11,7 @@ import {
   Typography,
 } from "@mui/material";
 import logo from "../assets/demologo.png";
-import NavBar from "@/components/NavBar";
+import Navbar from "@/components/Navbar";
 import { useRouter } from "next/router";
 import { getCookies } from "cookies-next";
 import { useState } from "react";
@@ -37,7 +37,7 @@ export default function Home({ data, user }) {
   return (
     <>
       <main>
-        <NavBar user={user} />
+        <Navbar user={user} />
         <Autocomplete
           id="free-solo-demo"
           options={searchData.map((option) => option.title)}

@@ -15,7 +15,6 @@ import { useState } from "react";
 import { useRouter } from "next/router";
 import { getCookies } from "cookies-next";
 import Navbar from "@/components/Navbar";
-import NavBar from "@/components/Navbar";
 
 const SunEditor = dynamic(() => import("suneditor-react"), {
   ssr: false,
@@ -55,7 +54,7 @@ export default function CreateBlog({ user }) {
     <>
       {!user ? (
         <>
-          <NavBar user={user} />
+          <Navbar user={user} />
           <h1
             style={{
               textAlign: "center",

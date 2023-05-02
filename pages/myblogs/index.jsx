@@ -1,4 +1,4 @@
-import NavBar from "@/components/NavBar";
+import Navbar from "@/components/Navbar";
 import { Box, Container, Grid, Typography } from "@mui/material";
 import React from "react";
 import { getCookies } from "cookies-next";
@@ -12,7 +12,7 @@ export default function BlogInfo({ data, user }) {
     <div>
       {!user ? (
         <>
-          <NavBar user={user} />
+          <Navbar user={user} />
           <h1
             style={{
               textAlign: "center",
@@ -33,7 +33,7 @@ export default function BlogInfo({ data, user }) {
         </>
       ) : (
         <main>
-          <NavBar user={user} />
+          <Navbar user={user} />
           <Container
             sx={{
               mt: "2rem",

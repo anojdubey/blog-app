@@ -1,11 +1,11 @@
 import { Box, Button, IconButton, Toolbar, Typography } from "@mui/material";
 import logo from "../assets/demologo.png";
 import Image from "next/image";
-import styles from "../styles/NavBar.module.css";
+import styles from "../styles/Navbar.module.css";
 import { useRouter } from "next/router";
 import { deleteCookie } from "cookies-next";
 
-export default function NavBar({ user }) {
+export default function Navbar({ user }) {
   const router = useRouter();
   const handleLogout = () => {
     deleteCookie("username");

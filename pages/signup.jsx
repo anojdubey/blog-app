@@ -3,7 +3,7 @@ import TextField from "@mui/material/TextField";
 import Button from "@mui/material/Button";
 import Container from "@mui/material/Container";
 import { css } from "@emotion/react";
-import NavBar from "@/components/NavBar";
+import Navbar from "@/components/Navbar";
 import { Box, Typography } from "@mui/material";
 import { useRouter } from "next/router";
 import { getCookies } from "cookies-next";
@@ -61,7 +61,7 @@ function SignUpForm() {
 
   return (
     <>
-      <NavBar />
+      <Navbar />
       <Container
         sx={{
           border: "1px solid gray",
