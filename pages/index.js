@@ -56,6 +56,7 @@ export default function Home({ data, user }) {
                 title={blog.title}
                 content={blog.content}
                 image={blog.images}
+                user={user}
               />
             </Box>
           ))}
@@ -65,7 +66,7 @@ export default function Home({ data, user }) {
   );
 }
 
-const BlogCard = ({ title, content, image, id }) => {
+const BlogCard = ({ title, content, image, id, user }) => {
   const router = useRouter();
   return (
     <Box
@@ -128,7 +129,9 @@ const BlogCard = ({ title, content, image, id }) => {
               right: "10px",
               textTransform: "none",
             }}
-            onClick={() => router.push(`/${id}`)}
+            onClick={() =>
+              user ? router.push(`/${id}`) : router.push(`/login`)
+            }
           >
             Read more
           </Button>
