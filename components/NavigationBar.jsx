@@ -12,82 +12,121 @@ export default function Navbar({ user }) {
     router.push("/");
   };
   return (
-    <Box sx={{ mb: "2rem" }}>
+    <Box
+      sx={{
+        mb: "2rem",
+        position: "fixed",
+        right: 0,
+        left: 0,
+        top: 0,
+        zIndex: 1000,
+        backdropFilter: "blur(5px)",
+      }}
+    >
       <Toolbar
         style={{
           padding: "5px",
           boxShadow: "5px 5px 8px #888888",
+          width: "100%",
         }}
       >
         <IconButton onClick={() => router.push("/")}>
-          <Image
+          {/* <Image
             style={{
               width: "120px",
               height: "auto",
             }}
             src={logo}
             alt="logo"
-          />
+          /> */}
+          <Typography
+            variant="h6"
+            color={"black"}
+            fontWeight={"700"}
+            component="div"
+            sx={{ flexGrow: 1 }}
+          >
+            Prodemic
+          </Typography>
         </IconButton>
         <Box
           sx={{
-            cursor: "pointer",
+            display: "flex",
+            flexDirection: "row",
+            flexGrow: 1,
+            justifyContent: "center",
           }}
-          onClick={() => router.push("/")}
         >
-          <Typography
-            className={styles.link}
-            variant="h6"
-            component="div"
-            sx={{ flexGrow: 1 }}
+          <Box
+            sx={{
+              cursor: "pointer",
+              "&:hover": {
+                color: "blue",
+              },
+            }}
             onClick={() => router.push("/")}
           >
-            Home
-          </Typography>
-        </Box>
-        <Box
-          sx={{
-            cursor: "pointer",
-          }}
-          onClick={() => router.push("/myblogs")}
-        >
-          <Typography
-            className={styles.link}
-            variant="h6"
-            component="div"
-            sx={{ flexGrow: 1 }}
+            <Typography
+              className={styles.link}
+              variant="h6"
+              component="div"
+              sx={{ flexGrow: 1 }}
+              onClick={() => router.push("/")}
+            >
+              Home
+            </Typography>
+          </Box>
+          <Box
+            sx={{
+              cursor: "pointer",
+              "&:hover": {
+                color: "blue",
+              },
+            }}
+            onClick={() => router.push("/myblogs")}
           >
-            My Blogs
-          </Typography>
-        </Box>
-        <Box
-          sx={{
-            cursor: "pointer",
-          }}
-          onClick={() => router.push("/createblog")}
-        >
-          <Typography
-            className={styles.link}
-            variant="h6"
-            component="div"
-            sx={{ flexGrow: 1 }}
+            <Typography
+              className={styles.link}
+              variant="h6"
+              component="div"
+              sx={{ flexGrow: 1 }}
+            >
+              My Posts
+            </Typography>
+          </Box>
+          <Box
+            sx={{
+              cursor: "pointer",
+              "&:hover": {
+                color: "blue",
+              },
+            }}
+            onClick={() => router.push("/createblog")}
           >
-            Create Blog
-          </Typography>
+            <Typography
+              className={styles.link}
+              variant="h6"
+              component="div"
+              sx={{ flexGrow: 1 }}
+            >
+              Create Post
+            </Typography>
+          </Box>
         </Box>
         <Box
           sx={{
             display: "flex",
+            flexDirection: "row",
             justifyContent: "flex-end",
-            flexGrow: 1,
-            alignItems: "center",
           }}
         >
           <Typography
             sx={{
               textAlign: "end",
               fontWeight: "bold",
-              color: "blue",
+              fontStyle: "italic",
+              fontFamily: "monospace",
+              color: "Black",
               mr: 2,
             }}
             variant="h6"
@@ -96,6 +135,10 @@ export default function Navbar({ user }) {
           </Typography>
           <Button
             onClick={() => (user ? handleLogout() : router.push("/login"))}
+            sx={{
+              textAlign: "center",
+              textTransform: "none",
+            }}
             variant="contained"
             color="primary"
           >

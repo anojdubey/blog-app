@@ -41,6 +41,7 @@ const formStyle = css`
 function LoginForm() {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
+
   const router = useRouter();
 
   const handleSubmit = async (e) => {
@@ -49,6 +50,7 @@ function LoginForm() {
     const response = await fetch(
       "https://blog-app-nu-olive.vercel.app/api/login",
       {
+        mode: "cors",
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -57,7 +59,6 @@ function LoginForm() {
       }
     );
     const data = await response.json();
-    alert(data.success);
     router.push("/");
   };
 
@@ -69,7 +70,7 @@ function LoginForm() {
           border: "1px solid gray",
           borderRadius: "8px",
           padding: "24px",
-          mt: "24px",
+          mt: "6rem",
         }}
         maxWidth="sm"
       >

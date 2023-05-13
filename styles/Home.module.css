@@ -258,6 +258,7 @@
   border-radius: 5px;
   border: 1px solid black;
   box-shadow: 5px 5px 8px #888888;
+  z-index: 1;
 }
 
 /* Tablet and Smaller Desktop */

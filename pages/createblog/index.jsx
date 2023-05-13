@@ -23,6 +23,7 @@ const SunEditor = dynamic(() => import("suneditor-react"), {
 export default function CreateBlog({ user }) {
   const [title, setTitle] = useState("");
   const [images, setImages] = useState("");
+  const [author, setAuthor] = useState("");
   const [content, setContent] = useState("");
   const [isLoading, setIsLoading] = useState(false);
   let router = useRouter();
@@ -32,7 +33,6 @@ export default function CreateBlog({ user }) {
   const handleSubmit = async () => {
     setIsLoading(true);
     try {
-      const author = "Anoj";
       // let date = new Date().toDateString();
       const req = { title, images, content, author };
       const response = await fetch("/api/blog", {
@@ -76,7 +76,12 @@ export default function CreateBlog({ user }) {
       ) : (
         <>
           <Navbar user={user} />
-          <Box display={"flex"} justifyContent={"center"} alignItems={"center"}>
+          <Box
+            sx={{ mt: "6rem" }}
+            display={"flex"}
+            justifyContent={"center"}
+            alignItems={"center"}
+          >
             <Grid
               sx={{ maxWidth: 600, height: 600, mt: 2 }}
               container
@@ -101,6 +106,14 @@ export default function CreateBlog({ user }) {
                           required
                           onChange={(e) => setImages(e.target.value)}
                           label="Image Url"
+                        />
+                      </Grid>
+                      <Grid item xs={12} sm={12} md={12}>
+                        <TextField
+                          fullWidth
+                          required
+                          onChange={(e) => setAuthor(e.target.value)}
+                          label="Author"
                         />
                       </Grid>
                       <Grid item xs={12} sm={12} md={12}>

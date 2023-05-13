@@ -70,7 +70,7 @@ function SignUpForm() {
           border: "1px solid gray",
           borderRadius: "8px",
           padding: "24px",
-          mt: "24px",
+          mt: "6rem",
         }}
         maxWidth="sm"
       >

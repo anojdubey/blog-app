@@ -20,15 +20,27 @@ export default function BlogDetails({ data, id, user, access }) {
   const [comment, setComment] = useState("");
   const router = useRouter();
   const handleDelete = async () => {
-    const response = await fetch(
-      `https://blog-app-nu-olive.vercel.app/api/blog/${id}`,
-      {
-        method: "DELETE",
-      }
-    );
+    const response = await fetch(`/api/blog/${id}`, {
+      method: "DELETE",
+    });
     const data = await response.json();
     console.log(data);
     router.push("/");
+  };
+
+  const handleDuplicate = async () => {
+    await fetch("/api/blog", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        title: data.title,
+        content: data.content,
+        images: data.images,
+        author: user,
+      }),
+    }).then((res) => alert("Blog Duplicated"));
   };
 
   const postComment = async () => {
@@ -59,8 +71,12 @@ export default function BlogDetails({ data, id, user, access }) {
   }, [comment]);
   return (
     <>
-      <Navbar />
-      <Container>
+      <Navbar user={user} />
+      <Container
+        sx={{
+          mt: "6rem",
+        }}
+      >
         <Grid
           container
           justifyContent={"center"}
@@ -84,7 +100,7 @@ export default function BlogDetails({ data, id, user, access }) {
               alt="image"
             />
           </Grid>
-          {access === "admin" || user === data.author ? (
+          {access === "admin" ? (
             <Grid item xs={12} md={12}>
               <Stack direction="row" spacing={2}>
                 <Button
@@ -105,9 +121,51 @@ export default function BlogDetails({ data, id, user, access }) {
                 >
                   Delete
                 </Button>
+                <Button
+                  sx={{
+                    textTransform: "none",
+                  }}
+                  variant="contained"
+                  onClick={handleDuplicate}
+                >
+                  Duplicate Post
+                </Button>
               </Stack>
             </Grid>
-          ) : null}
+          ) : user === data.author ? (
+            <Grid item xs={12} md={12}>
+              <Button
+                sx={{
+                  textTransform: "none",
+                }}
+                onClick={() => setEditblog(true)}
+                variant="contained"
+              >
+                Edit
+              </Button>
+              <Button
+                sx={{
+                  textTransform: "none",
+                }}
+                variant="contained"
+                onClick={handleDelete}
+              >
+                Delete
+              </Button>
+            </Grid>
+          ) : (
+            <Grid item xs={12} md={12}>
+              <Button
+                sx={{
+                  textTransform: "none",
+                }}
+                variant="contained"
+                onClick={handleDuplicate}
+              >
+                Duplicate Post
+              </Button>
+            </Grid>
+          )}
           <Grid item xs={12} md={12}>
             <Typography
               dangerouslySetInnerHTML={{
@@ -199,8 +257,8 @@ export const getServerSideProps = async (req, res) => {
     props: {
       data: data.blog,
       id: id,
-      user: cookie.username,
-      access: cookie.access,
+      user: cookie.username || "",
+      access: cookie.access || "",
     },
   };
 };

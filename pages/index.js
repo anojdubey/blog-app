@@ -38,14 +38,15 @@ export default function Home({ data, user }) {
     <>
       <main>
         <Navbar user={user} />
-        <Autocomplete
+        {/* <Autocomplete
           id="free-solo-demo"
           options={searchData.map((option) => option.title)}
           renderInput={(params) => <TextField {...params} label="freeSolo" />}
-        />
+        /> */}
         <Container
           sx={{
-            mt: "2rem",
+            mt: "6rem",
+            zIndex: 1,
           }}
         >
           {data.map((blog) => (
@@ -70,6 +71,7 @@ const BlogCard = ({ title, content, image, id }) => {
     <Box
       sx={{
         p: "7px",
+        position: "relative",
       }}
     >
       <Grid className={styles.blogcard} container>
@@ -119,7 +121,17 @@ const BlogCard = ({ title, content, image, id }) => {
               Read More ...
             </Typography>
           </IconButton> */}
-          <Button onClick={() => router.push(`/${id}`)}>Read more...</Button>
+          <Button
+            sx={{
+              position: "absolute",
+              bottom: "10px",
+              right: "10px",
+              textTransform: "none",
+            }}
+            onClick={() => router.push(`/${id}`)}
+          >
+            Read more
+          </Button>
         </Grid>
       </Grid>
     </Box>

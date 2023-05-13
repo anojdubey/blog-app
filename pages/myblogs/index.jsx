@@ -36,7 +36,7 @@ export default function BlogInfo({ data, user }) {
           <Navbar user={user} />
           <Container
             sx={{
-              mt: "2rem",
+              mt: "6rem",
             }}
           >
             {data.blog.map((blog) => (
@@ -108,7 +108,7 @@ const BlogCard = ({ title, content, image, id }) => {
               }}
               variant="body2"
             >
-              Read More ...
+              Read More
             </Typography>
           </Box>
         </Grid>
