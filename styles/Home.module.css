@@ -247,17 +247,17 @@
 .blogcard__content {
   overflow: hidden;
   display: -webkit-box;
-  -webkit-line-clamp: 4;
+  -webkit-line-clamp: 2;
+  color: rgba(0, 0, 0, 0.596);
+  font-weight: 600;
   padding-right: 4px;
   line-clamp: 2;
   -webkit-box-orient: vertical;
 }
 
 .blogcard {
-  align-items: flex-start;
-  border-radius: 5px;
-  border: 1px solid black;
-  box-shadow: 5px 5px 8px #888888;
+  margin-top: -1rem;
+  align-items: center;
   z-index: 1;
 }
 

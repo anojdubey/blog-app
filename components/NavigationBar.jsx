@@ -14,19 +14,19 @@ export default function Navbar({ user }) {
   return (
     <Box
       sx={{
-        mb: "2rem",
         position: "fixed",
         right: 0,
         left: 0,
         top: 0,
         zIndex: 1000,
-        backdropFilter: "blur(5px)",
+        backdropFilter: "blur(8px)",
+        backgroundColor: "rgba(255, 255, 255, 0.5)",
+        borderBottom: "1px solid rgba(255, 255, 255, 0.18)",
       }}
     >
       <Toolbar
         style={{
           padding: "5px",
-          boxShadow: "5px 5px 8px #888888",
           width: "100%",
         }}
       >
@@ -60,6 +60,7 @@ export default function Navbar({ user }) {
           <Box
             sx={{
               cursor: "pointer",
+              color: "gray",
               "&:hover": {
                 color: "blue",
               },
@@ -70,7 +71,7 @@ export default function Navbar({ user }) {
               className={styles.link}
               variant="h6"
               component="div"
-              sx={{ flexGrow: 1 }}
+              sx={{ flexGrow: 1, fontWeight: "500" }}
               onClick={() => router.push("/")}
             >
               Home
@@ -79,6 +80,8 @@ export default function Navbar({ user }) {
           <Box
             sx={{
               cursor: "pointer",
+              color: "gray",
+
               "&:hover": {
                 color: "blue",
               },
@@ -89,7 +92,7 @@ export default function Navbar({ user }) {
               className={styles.link}
               variant="h6"
               component="div"
-              sx={{ flexGrow: 1 }}
+              sx={{ flexGrow: 1, fontWeight: "500" }}
             >
               My Posts
             </Typography>
@@ -97,6 +100,8 @@ export default function Navbar({ user }) {
           <Box
             sx={{
               cursor: "pointer",
+              color: "gray",
+
               "&:hover": {
                 color: "blue",
               },
@@ -107,7 +112,7 @@ export default function Navbar({ user }) {
               className={styles.link}
               variant="h6"
               component="div"
-              sx={{ flexGrow: 1 }}
+              sx={{ flexGrow: 1, fontWeight: "500" }}
             >
               Create Post
             </Typography>
@@ -123,10 +128,10 @@ export default function Navbar({ user }) {
           <Typography
             sx={{
               textAlign: "end",
-              fontWeight: "bold",
+              fontWeight: "600",
               fontStyle: "italic",
+              color: "gray",
               fontFamily: "monospace",
-              color: "Black",
               mr: 2,
             }}
             variant="h6"

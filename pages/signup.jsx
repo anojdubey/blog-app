@@ -47,16 +47,13 @@ function SignUpForm() {
     e.preventDefault();
     const access = "user";
     const req = { username, password, access };
-    const response = await fetch(
-      "https://blog-app-nu-olive.vercel.app/api/signup",
-      {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(req),
-      }
-    );
+    const response = await fetch("/api/signup", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(req),
+    });
     const data = await response.json();
     alert(response.status === 200 ? "Success" : data.message);
     router.push("/login");

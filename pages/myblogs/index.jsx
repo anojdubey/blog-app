@@ -16,6 +16,7 @@ export default function BlogInfo({ data, user }) {
           <h1
             style={{
               textAlign: "center",
+              marginTop: "5rem",
             }}
           >
             Please Login First{" "}
@@ -40,14 +41,12 @@ export default function BlogInfo({ data, user }) {
             }}
           >
             {data.blog.map((blog) => (
-              <Box key={blog._id}>
-                <BlogCard
-                  id={blog._id}
-                  title={blog.title}
-                  content={blog.content}
-                  image={blog.images}
-                />
-              </Box>
+              <BlogCard
+                id={blog._id}
+                title={blog.title}
+                content={blog.content}
+                image={blog.images}
+              />
             ))}
           </Container>
         </main>
@@ -61,16 +60,19 @@ const BlogCard = ({ title, content, image, id }) => {
   return (
     <Box
       sx={{
-        p: "7px",
+        boxShadow: "0px 0px 5px 0px rgba(0,0,0,0.75)",
+        borderRadius: "5px",
+        mb: "1rem",
+        mt: "1rem",
       }}
     >
-      <Grid className={styles.blogcard} container>
+      <Grid container>
         <Grid item xs={3}>
           <img
             src={image ? image : logo}
             style={{
               width: "250px",
-              height: "180px",
+              height: "150px",
               padding: "5px",
             }}
           />

@@ -47,17 +47,14 @@ function LoginForm() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     const req = { username, password };
-    const response = await fetch(
-      "https://blog-app-nu-olive.vercel.app/api/login",
-      {
-        mode: "cors",
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(req),
-      }
-    );
+    const response = await fetch("/api/login", {
+      mode: "cors",
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(req),
+    });
     const data = await response.json();
     router.push("/");
   };
