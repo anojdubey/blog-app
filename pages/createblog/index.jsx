@@ -7,6 +7,8 @@ import {
   TextField,
   CardActions,
   Button,
+  useTheme,
+  useMediaQuery,
 } from "@mui/material";
 import dynamic from "next/dynamic";
 import "../../styles/BlogForm.module.css";
@@ -15,6 +17,7 @@ import { useState } from "react";
 import { useRouter } from "next/router";
 import { getCookies } from "cookies-next";
 import Navbar from "@/components/NavigationBar";
+import Footer from "@/components/Footer";
 
 const SunEditor = dynamic(() => import("suneditor-react"), {
   ssr: false,
@@ -26,6 +29,8 @@ export default function CreateBlog({ user }) {
   const [content, setContent] = useState("");
   const [isLoading, setIsLoading] = useState(false);
   let router = useRouter();
+  const theme = useTheme();
+  const mobile = useMediaQuery(theme.breakpoints.down("md"));
 
   const handleOnChange = (editorContent) => setContent(editorContent);
 
@@ -73,6 +78,7 @@ export default function CreateBlog({ user }) {
               Click Here
             </span>
           </h1>
+          {mobile && <Footer />}
         </>
       ) : (
         <>
@@ -138,6 +144,7 @@ export default function CreateBlog({ user }) {
               </Grid>
             </Grid>
           </Box>
+          {mobile && <Footer />}
         </>
       )}
     </>

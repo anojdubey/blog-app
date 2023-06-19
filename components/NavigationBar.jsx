@@ -1,4 +1,12 @@
-import { Box, Button, IconButton, Toolbar, Typography } from "@mui/material";
+import {
+  Box,
+  Button,
+  IconButton,
+  Toolbar,
+  Typography,
+  useMediaQuery,
+  useTheme,
+} from "@mui/material";
 import logo from "../assets/demologo.png";
 import Image from "next/image";
 import styles from "../styles/Navbar.module.css";
@@ -11,6 +19,8 @@ export default function Navbar({ user }) {
     deleteCookie("username");
     router.push("/");
   };
+  const theme = useTheme();
+  const mobile = useMediaQuery(theme.breakpoints.down("md"));
   return (
     <Box
       sx={{
@@ -19,6 +29,9 @@ export default function Navbar({ user }) {
         left: 0,
         top: 0,
         zIndex: 1000,
+        display: "flex",
+        justifyContent: "center",
+        alignItems: "center",
         backdropFilter: "blur(8px)",
         backgroundColor: "rgba(255, 255, 255, 0.5)",
         borderBottom: "1px solid rgba(255, 255, 255, 0.18)",
@@ -44,7 +57,11 @@ export default function Navbar({ user }) {
             color={"black"}
             fontWeight={"700"}
             component="div"
-            sx={{ flexGrow: 1 }}
+            sx={{
+              flexGrow: 1,
+              fontFamily: "monospace",
+              fontSize: mobile ? "1.2rem" : "1.4rem",
+            }}
           >
             Prodemic
           </Typography>
@@ -71,12 +88,17 @@ export default function Navbar({ user }) {
               className={styles.link}
               variant="h6"
               component="div"
-              sx={{ flexGrow: 1, fontWeight: "500" }}
+              sx={{
+                flexGrow: 1,
+                fontWeight: "500",
+                fontSize: mobile ? "1rem" : "1.4rem",
+              }}
               onClick={() => router.push("/")}
             >
               Home
             </Typography>
           </Box>
+          {!mobile && (
           <Box
             sx={{
               cursor: "pointer",
@@ -92,11 +114,16 @@ export default function Navbar({ user }) {
               className={styles.link}
               variant="h6"
               component="div"
-              sx={{ flexGrow: 1, fontWeight: "500" }}
+              sx={{
+                flexGrow: 1,
+                fontWeight: "500",
+                fontSize: mobile ? "1rem" : "1.4rem",
+              }}
             >
               My Posts
             </Typography>
-          </Box>
+          </Box>)}
+          {!mobile && (
           <Box
             sx={{
               cursor: "pointer",
@@ -112,11 +139,15 @@ export default function Navbar({ user }) {
               className={styles.link}
               variant="h6"
               component="div"
-              sx={{ flexGrow: 1, fontWeight: "500" }}
+              sx={{
+                flexGrow: 1,
+                fontWeight: "500",
+                fontSize: mobile ? "1rem" : "1.4rem",
+              }}
             >
               Create Post
             </Typography>
-          </Box>
+          </Box>)}
         </Box>
         <Box
           sx={{
@@ -132,7 +163,7 @@ export default function Navbar({ user }) {
               fontStyle: "italic",
               color: "gray",
               fontFamily: "monospace",
-              mr: 2,
+              mr: 2,fontSize: mobile ? "1rem":"1.4rem"
             }}
             variant="h6"
           >

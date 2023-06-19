@@ -9,18 +9,23 @@ import {
   Stack,
   TextField,
   Typography,
+  useMediaQuery,
+  useTheme,
 } from "@mui/material";
 import { getCookies } from "cookies-next";
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
 import profile from "../assets/profilepic.png";
 import Image from "next/image";
+import Footer from "@/components/Footer";
 
 export default function BlogDetails({ data, id, user, access }) {
   const [editblog, setEditblog] = useState(false);
   const [prevComments, setPrevComments] = useState(data.comments);
   const [comment, setComment] = useState("");
   const router = useRouter();
+  const theme = useTheme();
+  const mobile = useMediaQuery(theme.breakpoints.down("md"));
   const handleDelete = async () => {
     const response = await fetch(`/api/blog/${id}`, {
       method: "DELETE",
@@ -73,8 +78,9 @@ export default function BlogDetails({ data, id, user, access }) {
       <Navbar user={user} />
       <Box
         sx={{
-          m: "4rem",
+          m: mobile ? "1rem" : "4rem",
           mt: "6rem",
+          mb:mobile && "3rem",
         }}
       >
         <Grid
@@ -83,16 +89,16 @@ export default function BlogDetails({ data, id, user, access }) {
           alignItems={"center"}
           spacing={4}
         >
-          <Grid item xs={7.5}>
+          <Grid item md={7.5} xs={12}>
             <img
               width={"100%"}
-              height={"550px"}
+              height={mobile ? "250px":"550px"}
               src={data.images}
               alt="image"
             />
             <Grid container justifyContent={"center"} alignItems={"center"}>
               {access === "admin" ? (
-                <Grid item xs={6}>
+                <Grid item md={6} xs={12}>
                   <Stack
                     justifyContent={"center"}
                     alignItems={"center"}
@@ -129,7 +135,7 @@ export default function BlogDetails({ data, id, user, access }) {
                   </Stack>
                 </Grid>
               ) : user === data.author ? (
-                <Grid item xs={6}>
+                <Grid item md={6} xs={12}>
                   <Button
                     sx={{
                       textTransform: "none",
@@ -150,7 +156,7 @@ export default function BlogDetails({ data, id, user, access }) {
                   </Button>
                 </Grid>
               ) : (
-                <Grid item xs={3}>
+                <Grid itemmd={3} xs={12}>
                   <Button
                     sx={{
                       textTransform: "none",
@@ -174,7 +180,7 @@ export default function BlogDetails({ data, id, user, access }) {
               },
             }}
             item
-            xs={4.5}
+            md={4.5} xs={12}
           >
             <h1
               style={{
@@ -272,6 +278,8 @@ export default function BlogDetails({ data, id, user, access }) {
           titles={data.title}
         />
       </Modal>
+      {mobile && <Footer />}
+
     </>
   );
 }

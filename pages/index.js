@@ -9,31 +9,25 @@ import {
   IconButton,
   TextField,
   Typography,
+  useMediaQuery,
+  useTheme,
 } from "@mui/material";
 import logo from "../assets/demologo.png";
 import Navbar from "@/components/NavigationBar";
 import { useRouter } from "next/router";
 import { getCookies } from "cookies-next";
 import { useState } from "react";
-
-const inter = Inter({ subsets: ["latin"] });
-
-const filterData = (query, data) => {
-  if (!query) {
-    return data;
-  } else {
-    return data.filter((d) => d.toLowerCase().includes(query));
-  }
-};
+import Footer from "@/components/Footer";
 
 export default function Home({ data, user }) {
-  const [searchQuery, setSearchQuery] = useState("");
   const searchData = data.map((d) => ({
     title: d.title,
     author: d.author,
   }));
   const mapdata = data.slice(1, data.length);
   console.log(searchData);
+  const theme = useTheme();
+  const mobile = useMediaQuery(theme.breakpoints.down("md"));
 
   return (
     <>
@@ -42,6 +36,7 @@ export default function Home({ data, user }) {
           backgroundColor: "#f5f5f5",
           height: "100%",
           overflow: "hidden",
+          marginBottom: mobile && "3rem",
           "&::-webkit-scrollbar": {
             display: "none",
           },
@@ -53,23 +48,23 @@ export default function Home({ data, user }) {
           options={searchData.map((option) => option.title)}
           renderInput={(params) => <TextField {...params} label="freeSolo" />}
         /> */}
-        <Box
+        <Grid
+          container
           sx={{
             mt: "6rem",
             zIndex: 1,
             p: "1rem",
             display: "flex",
             flexDirection: "row",
-            width: "100%",
-            height: "100%",
             overflow: "hidden",
           }}
         >
-          <Box
+          <Grid
+            item
+            xs={12}
+            md={8}
             sx={{
-              width: "70%",
               p: "2rem",
-              height: "100%",
               overflowY: "hidden",
               "::webkit-scrollbar": {
                 display: "none",
@@ -83,10 +78,12 @@ export default function Home({ data, user }) {
               id={data[0]._id}
               user={user}
             />
-          </Box>
-          <Box
+          </Grid>
+          <Grid
+            item
+            xs={12}
+            md={4}
             sx={{
-              width: "30%",
               overflowY: "scroll",
               height: "81vh",
               webkitOverflowScrolling: "touch",
@@ -105,8 +102,9 @@ export default function Home({ data, user }) {
                 />
               </Box>
             ))}
-          </Box>
-        </Box>
+          </Grid>
+        </Grid>
+        {mobile && <Footer />}
       </main>
     </>
   );

@@ -1,13 +1,23 @@
 import Navbar from "@/components/NavigationBar";
-import { Box, Container, Grid, Typography } from "@mui/material";
+import {
+  Box,
+  Container,
+  Grid,
+  Typography,
+  useMediaQuery,
+  useTheme,
+} from "@mui/material";
 import React from "react";
 import { getCookies } from "cookies-next";
 import { useRouter } from "next/router";
 import styles from "@/styles/Home.module.css";
+import Footer from "@/components/Footer";
 
 export default function BlogInfo({ data, user }) {
   const router = useRouter();
   console.log(data);
+  const theme = useTheme();
+  const mobile = useMediaQuery(theme.breakpoints.down("md"));
   return (
     <div>
       {!user ? (
@@ -31,6 +41,7 @@ export default function BlogInfo({ data, user }) {
               Click Here
             </span>
           </h1>
+          {mobile && <Footer />}
         </>
       ) : (
         <main>
@@ -38,6 +49,7 @@ export default function BlogInfo({ data, user }) {
           <Container
             sx={{
               mt: "6rem",
+              mb: mobile && "4rem",
             }}
           >
             {data.blog.map((blog) => (
@@ -49,6 +61,7 @@ export default function BlogInfo({ data, user }) {
               />
             ))}
           </Container>
+          {mobile && <Footer />}
         </main>
       )}
     </div>
@@ -57,6 +70,8 @@ export default function BlogInfo({ data, user }) {
 
 const BlogCard = ({ title, content, image, id }) => {
   const router = useRouter();
+  const theme = useTheme();
+  const mobile = useMediaQuery(theme.breakpoints.down("md"));
   return (
     <Box
       sx={{
@@ -65,14 +80,17 @@ const BlogCard = ({ title, content, image, id }) => {
         mb: "1rem",
         mt: "1rem",
       }}
+      onClick={() => router.push(`/${id}`)}
     >
-      <Grid container>
+      <Grid justifyContent={"center"} alignItems={"center"} container>
         <Grid item xs={3}>
           <img
             src={image ? image : logo}
             style={{
-              width: "250px",
-              height: "150px",
+              width: mobile?"100%":"100%",
+              height: mobile?"75px":"150px",
+              objectFit: "cover",
+              marginRight: "1rem",
               padding: "5px",
             }}
           />
@@ -81,38 +99,20 @@ const BlogCard = ({ title, content, image, id }) => {
           <Typography
             sx={{
               mb: "1rem",
+              fontSize: mobile && "1rem",
             }}
             variant="h6"
           >
             {title}
           </Typography>
+          {!mobile && (
           <Typography
             dangerouslySetInnerHTML={{
               __html: content,
             }}
             className={styles.blogcard__content}
             variant="body1"
-          ></Typography>
-          <Box
-            sx={{
-              mt: "1rem",
-              display: "flex",
-              justifyContent: "flex-end",
-              alignItems: "center",
-              mr: "1rem",
-              cursor: "pointer",
-            }}
-            onClick={() => router.push(`/${id}`)}
-          >
-            <Typography
-              sx={{
-                color: "blue",
-              }}
-              variant="body2"
-            >
-              Read More
-            </Typography>
-          </Box>
+          ></Typography>)}
         </Grid>
       </Grid>
     </Box>
