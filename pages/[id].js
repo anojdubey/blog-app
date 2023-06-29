@@ -80,7 +80,7 @@ export default function BlogDetails({ data, id, user, access }) {
         sx={{
           m: mobile ? "1rem" : "4rem",
           mt: "6rem",
-          mb:mobile && "3rem",
+          mb: mobile && "3rem",
         }}
       >
         <Grid
@@ -92,7 +92,7 @@ export default function BlogDetails({ data, id, user, access }) {
           <Grid item md={7.5} xs={12}>
             <img
               width={"100%"}
-              height={mobile ? "250px":"550px"}
+              height={mobile ? "250px" : "550px"}
               src={data.images}
               alt="image"
             />
@@ -180,7 +180,8 @@ export default function BlogDetails({ data, id, user, access }) {
               },
             }}
             item
-            md={4.5} xs={12}
+            md={4.5}
+            xs={12}
           >
             <h1
               style={{
@@ -279,7 +280,6 @@ export default function BlogDetails({ data, id, user, access }) {
         />
       </Modal>
       {mobile && <Footer />}
-
     </>
   );
 }
@@ -288,7 +288,9 @@ export const getServerSideProps = async (req, res) => {
   const cookie = getCookies(req);
   console.log(cookie);
   const id = req.query.id;
-  const response = await fetch(`/api/blog/${id}`);
+  const response = await fetch(
+    `https://blog-app-anoj.vercel.app/api/blog/${id}`
+  );
   const data = await response.json();
   return {
     props: {

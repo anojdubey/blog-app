@@ -47,7 +47,7 @@ function SignUpForm() {
     e.preventDefault();
     const access = "user";
     const req = { username, password, access };
-    const response = await fetch("/api/signup", {
+    const response = await fetch("https://blog-app-anoj.vercel.app/api/signup", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
