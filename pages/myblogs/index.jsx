@@ -125,7 +125,7 @@ export const getServerSideProps = async (req, res) => {
   let user = cookie.username;
   if (!cookie) cookie = "";
   if (user) {
-    const response = await fetch(`https://blog-app-anoj.vercel.app/api/myblog/`, {
+    const response = await fetch(`https://blog-app-anoj.vercel.app/api/myblog`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
