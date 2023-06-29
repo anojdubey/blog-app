@@ -121,7 +121,7 @@ const BlogCard = ({ title, content, image, id }) => {
 
 export const getServerSideProps = async (req, res) => {
   let cookie = getCookies(req);
-  let data;
+  let data = [];
   let user = cookie.username;
   if (!cookie) cookie = "";
   if (user) {
@@ -134,7 +134,6 @@ export const getServerSideProps = async (req, res) => {
     });
     data = await response.json();
   }
-  console.log(data);
   return {
     props: {
       data: data || null,
