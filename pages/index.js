@@ -248,7 +248,7 @@ const BlogCard = ({ title, image, id, user }) => {
 };
 
 export const getServerSideProps = async (req, res) => {
-  const response = await fetch(`https://prodemic.vercel.app/api/blog`);
+  const response = await fetch(`/api/blog`);
   const data = await response.json();
   let cookie = getCookies(req);
   if (!cookie) cookie = "";

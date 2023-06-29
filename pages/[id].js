@@ -288,7 +288,7 @@ export const getServerSideProps = async (req, res) => {
   const cookie = getCookies(req);
   console.log(cookie);
   const id = req.query.id;
-  const response = await fetch(`https://prodemic.vercel.app/api/blog/${id}`);
+  const response = await fetch(`/api/blog/${id}`);
   const data = await response.json();
   return {
     props: {
