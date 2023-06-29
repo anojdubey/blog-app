@@ -37,7 +37,7 @@ export default function Home({ data, user }) {
           height: "100%",
           overflow: "hidden",
           marginBottom: mobile && "3rem",
-          "&::-webkit-scrollbar": {
+          "&::WebkitScrollbar": {
             display: "none",
           },
         }}

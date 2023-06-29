@@ -47,7 +47,7 @@ function LoginForm() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     const req = { username, password };
-    const response = await fetch("https://blog-app-anoj.vercel.app/api/login", {
+    const response = await fetch("/api/login", {
       mode: "cors",
       method: "POST",
       headers: {

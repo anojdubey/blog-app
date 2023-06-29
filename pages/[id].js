@@ -175,7 +175,7 @@ export default function BlogDetails({ data, id, user, access }) {
               overflowY: "scroll",
               webkitOverflowScrolling: "touch",
               height: "85vh",
-              "&::-webkit-scrollbar": {
+              "&::WebkitScrollbar": {
                 display: "none",
               },
             }}
