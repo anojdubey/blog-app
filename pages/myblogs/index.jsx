@@ -52,7 +52,7 @@ export default function BlogInfo({ data, user }) {
               mb: mobile && "4rem",
             }}
           >
-            {data.blog.map((blog) => (
+            {data?.blog?.map((blog) => (
               <BlogCard
                 id={blog._id}
                 title={blog.title}
